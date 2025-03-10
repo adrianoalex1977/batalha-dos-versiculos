@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Batalha dos Versículos</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="admin.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Painel Admin</h1>
+    <form id="add-versiculo-form">
+        <input type="text" id="texto" placeholder="Versículo" required>
+        <input type="text" id="referencia" placeholder="Referência" required>
+        <input type="text" id="assuntos" placeholder="Assuntos (separados por vírgula)">
+        <input type="text" id="pesos" placeholder="Pesos (separados por vírgula)">
+        <button type="submit">Adicionar</button>
+    </form>
+    <div id="versiculos-lista"></div>
+</body>
+</html>
