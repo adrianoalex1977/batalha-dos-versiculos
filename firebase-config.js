@@ -1,11 +1,21 @@
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
+
 const firebaseConfig = {
-    apiKey: "SUA_API_KEY",
-    authDomain: "SEU_DOMINIO.firebaseapp.com",
-    databaseURL: "https://SEU_DOMINIO.firebaseio.com",
-    projectId: "SEU_PROJETO_ID",
-    storageBucket: "SEU_DOMINIO.appspot.com",
-    messagingSenderId: "SEU_SENDER_ID",
-    appId: "SEU_APP_ID"
+  apiKey: "AIzaSyAIQyLgAlSGQc9XYXBNlD1VzXG5j1jGD7Q",
+  authDomain: "batalhadeversiculos.firebaseapp.com",
+  databaseURL: "https://batalhadeversiculos-default-rtdb.firebaseio.com",
+  projectId: "batalhadeversiculos",
+  storageBucket: "batalhadeversiculos.firebasestorage.app",
+  messagingSenderId: "303788781845",
+  appId: "1:303788781845:web:91b76bd127ada18875791c",
+  measurementId: "G-NVG8CHZD10"
 };
-firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const database = getDatabase(app);
+
+export { database };
