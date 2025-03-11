@@ -1,23 +1,28 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin - Batalha dos Versículos</title>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="admin.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Painel Admin</h1>
-    <form id="add-versiculo-form">
-        <input type="text" id="texto" placeholder="Versículo" required>
-        <input type="text" id="referencia" placeholder="Referência" required>
-        <input type="text" id="assuntos" placeholder="Assuntos (separados por vírgula)">
-        <input type="text" id="pesos" placeholder="Pesos (separados por vírgula)">
-        <button type="submit">Adicionar</button>
-    </form>
-    <div id="versiculos-lista"></div>
-</body>
-</html>
+const form = document.getElementById('add-versiculo-form');
+const lista = document.getElementById('versiculos-lista');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const texto = document.getElementById('texto').value;
+    const referencia = document.getElementById('referencia').value;
+    const assuntos = document.getElementById('assuntos').value.split(',').map(a => a.trim());
+    const pesos = document.getElementById('pesos').value.split(',').map(p => Number(p.trim()));
+
+    const novoVersiculo = { texto, referencia, assuntos, pesos };
+    database.ref('versiculos').push(novoVersiculo);
+
+    form.reset();
+});
+
+function carregarVersiculos() {
+    database.ref('versiculos').on('value', (snapshot) => {
+        lista.innerHTML = '';
+        snapshot.forEach(child => {
+            const v = child.val();
+            const div = document.createElement('div');
+            div.innerHTML = `<p>${v.texto} - <small>${v.referencia}</small></p>`;
+            lista.appendChild(div);
+        });
+    });
+}
+carregarVersiculos();
